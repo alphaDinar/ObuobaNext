@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
     <LoaderProvider>
       <PlayingProvider>
         <Head>
-          <script src="https://it.fontawesome.com/eb75260fb3.js" crossorigin="anonymous" />
+          <script src="https://it.fontawesome.com/eb75260fb3.js" crossorigin="anonymous" async/>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
         </Head>
         <Loader />
