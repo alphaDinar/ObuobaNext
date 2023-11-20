@@ -5,7 +5,7 @@ const NewsBox = (props) => {
   const { posts } = props;
   return (
     <section className='news_box'>
-      {posts.map((post, i) => (
+      {posts != undefined && posts.map((post, i) => (
         <Link key={i} href={`post/${post.pid}`}>
           <section className='news' data-aos="fade-up">
             <p>
