@@ -20,6 +20,7 @@ const Programs = () => {
   const [start, setStart] = useState('');
   const [end, setEnd] = useState('');
   const [programs, setPrograms] = useState([]);
+  const [programBank, setProgramBank] = useState([]);
   const [updateMode, setUpdateMode] = useState(false);
   const [pid, setPid] = useState('');
 
@@ -44,6 +45,7 @@ const Programs = () => {
     getDoc(doc(fireStoreDB, 'Obuoba/' + 'con'))
       .then((res) => {
         setPrograms(res.data().programs)
+        setProgramBank(res.data().programs)
         setLoader(false)
       })
       .catch((error) => console.log(error))
@@ -161,16 +163,36 @@ const Programs = () => {
     }
   }
 
+  const filterDays =(val)=>{
+    const programsTemp = [...programBank];
+    if(val === 'all'){
+      setPrograms(programsTemp)
+    }else{
+      setPrograms(programsTemp.filter((el)=> parseInt(el.day) === parseInt(val)))
+    }
+  }
+
+  const searchProgram =(val)=>{
+    const programsTemp = [...programBank];
+    setPrograms(programsTemp.filter((el)=> el.name.toLowerCase().includes(val.toLowerCase())))
+    // console.log(programsTemp[0].name.toLowerCase().includes(val))
+    // console.log(programsTemp.filter((el)=> el.name.toLowerCase().includes(val)))
+    
+  }
+
   return (
     <section className={styles.page}>
       <ManagerSidebar />
       <section className={styles.main}>
         <header>
-          <select>
-            <option value="all">All</option>
+          <select onChange={(e)=>{filterDays(e.target.value)}}>
+            <option value='all'>All</option>
+            {dayBoxes.map((el,i)=>(
+              <option value={el.code}>{el.name}</option>
+            ))}
           </select>
           <strong>Programs</strong>
-          <input type="text" placeholder="Search Program" />
+          <input type="text" placeholder="Search Program" onChange={(e)=>{searchProgram(e.target.value.toLowerCase())}} />
         </header>
 
 

@@ -79,7 +79,7 @@ export default function Home() {
 
           <section className={styles.top_swiper}>
             <Swiper slidesPerView={slideCount} spaceBetween={30} >
-              {[...posts].reverse().map((el, i) => (
+              {[...posts].slice(0,5).reverse().map((el, i) => (
                 el.type === 'image' &&
                 <SwiperSlide key={i}>
                   <Link href={`post/${el.pid}`}>

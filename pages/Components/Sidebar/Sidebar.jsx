@@ -4,8 +4,10 @@ import styles from '../sides.module.css';
 import { categories } from '../../../External/lists';
 import { useEffect, useState } from 'react';
 
-const Sidebar = (props) => {
+const Sidebar = ({props}) => {
+  
   const { posts, setPosts } = props;
+  console.log(posts)
   const [postsBank, setPostsBank] = useState([]);
   const [currentProgram, setCurrentProgram] = useState({});
 

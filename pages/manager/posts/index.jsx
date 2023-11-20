@@ -20,6 +20,7 @@ const Posts = () => {
   const [source, setSource] = useState('');
   const [tags, setTags] = useState('');
   const [posts, setPosts] = useState([]);
+  const [postBank, setPostBank] = useState([]);
   const [updateMode, setUpdateMode] = useState(false);
   const [pid, setPid] = useState('');
 
@@ -45,6 +46,7 @@ const Posts = () => {
       await getDoc(doc(fireStoreDB, 'Obuoba/' + 'con'))
         .then((res) => {
           setPosts(res.data().posts)
+          setPostBank(res.data().posts)
           setLoader(false)
         })
     }
@@ -55,7 +57,6 @@ const Posts = () => {
     setMedia(file);
     setPreviewMedia(URL.createObjectURL(file))
     setType(file.type.split('/')[0]);
-
   }
 
   const createPost = () => {
@@ -174,18 +175,29 @@ const Posts = () => {
     }
   }
 
+  const filterPosts = (val)=>{
+    const postsTemp = [...postBank];
+    setPosts(postsTemp.filter((el)=> el.category === val))
+  }
 
+  const searchPost =(val)=>{
+    const postsTemp = [...postBank];
+    setPosts(postsTemp.filter((el)=> el.title.toLowerCase().includes(val.toLowerCase())))
+  }
 
   return (
     <section className={styles.page}>
       <ManagerSidebar />
       <section className={styles.main}>
         <header>
-          <select>
+          <select onChange={(e)=>{filterPosts(e.target.value)}}>
             <option value="all">All</option>
+            {categories.map((el,i)=>(
+              <option value={el.name}>{el.name}</option>
+            ))}
           </select>
           <strong>Posts</strong>
-          <input type="text" placeholder="Search Post" />
+          <input type="text" placeholder="Search Post" onChange={(e)=>{searchPost(e.target.value)}} />
         </header>
 
         <section className={styles.list_box}>

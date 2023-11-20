@@ -1,15 +1,33 @@
 import Link from 'next/link';
 import { icon } from '../../External/external';
 import styles from './managerSidebar.module.css';
-import { useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { fireAuth } from '../../Firebase/base';
+import { useRouter } from "next/router";
 
 const ManagerSidebar = () => {
+  const router = useRouter();
   const [sidebarToggled, setSidebarToggled] = useState(false);
 
   const toggleSidebar=()=>{
     sidebarToggled ? setSidebarToggled(false) : setSidebarToggled(true);
+  }
+
+  useEffect(()=>{
+    console.log('mr')
+    onAuthStateChanged(fireAuth, (user)=>{
+      if(!user){
+        router.push('/manager/login')
+      }
+    })
+  })
+
+  const logoutUser =()=>{
+    signOut(fireAuth)
+    .then(()=>{
+      console.log('logged Out')
+    })
   }
 
   return (
@@ -25,12 +43,12 @@ const ManagerSidebar = () => {
         <Link href={'/manager/posts'}>
           <a>{icon('post_add')} <span>Posts</span></a>
         </Link>
-        <Link href={'/manager/team'}>
-          <a>{icon('group')} <span>Team</span></a>
+        <Link href={'/manager/teams'}>
+          <a>{icon('group')} <span>Teams</span></a>
         </Link>
       </nav>
       <footer>
-        <a href=""><i className="material-symbols-outlined">power_settings_new</i> <span>Logout</span></a>
+        <a onClick={logoutUser}><i className="material-symbols-outlined">power_settings_new</i> <span>Logout</span></a>
       </footer>
     </section>
   );
