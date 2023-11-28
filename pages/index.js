@@ -41,7 +41,7 @@ export default function Home() {
     <>
       <TopNav />
       <section className='page'>
-        <Sidebar props={{posts, setPosts}} />
+        <Sidebar posts={posts} setPosts={setPosts} props={{posts, setPosts}} />
         <section className='main'>
           <section className={styles.main_player}>
             {currentProgram &&

@@ -33,8 +33,9 @@ export const getTimeSince = (date) => {
   }
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
-  const inputYear = date.getFullYear();
-  const inputMonth = date.getMonth();
+  console.log('date', date)
+  const inputYear = new Date(date).getFullYear();
+  const inputMonth = new Date(date).getMonth();
   const yearDifference = currentYear - inputYear;
   const monthDifference = currentMonth - inputMonth;
   if (yearDifference === 0) {

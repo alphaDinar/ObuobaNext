@@ -188,7 +188,7 @@ const Programs = () => {
           <select onChange={(e)=>{filterDays(e.target.value)}}>
             <option value='all'>All</option>
             {dayBoxes.map((el,i)=>(
-              <option value={el.code}>{el.name}</option>
+              <option key={i} value={el.code}>{el.name}</option>
             ))}
           </select>
           <strong>Programs</strong>

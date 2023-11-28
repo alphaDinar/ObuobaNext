@@ -1,12 +1,14 @@
 import { useLoader } from "../_app";
 
 const Loader = () => {
-  const {loader} = useLoader();
-
-  console.log(loader)
+  
+  const { loader } = useLoader();
 
   return (
-    <section style={loader ? { display: 'flex' } : {display : 'none'}} className="loader">
+    <section
+      style={loader ? { display: "flex" } : { display: "none" }}
+      className="loader"
+    >
       <div>
         <small></small>
         <small></small>
@@ -14,6 +16,6 @@ const Loader = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Loader;

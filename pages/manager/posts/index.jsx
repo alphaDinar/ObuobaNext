@@ -193,7 +193,7 @@ const Posts = () => {
           <select onChange={(e)=>{filterPosts(e.target.value)}}>
             <option value="all">All</option>
             {categories.map((el,i)=>(
-              <option value={el.name}>{el.name}</option>
+              <option key={i} value={el.name}>{el.name}</option>
             ))}
           </select>
           <strong>Posts</strong>

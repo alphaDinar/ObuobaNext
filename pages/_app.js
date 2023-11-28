@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import '../styles/globals.css'
-import Loader from './Components/Loader'
-import { createContext, useContext, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { fireAuth, fireStoreDB } from '../Firebase/base';
+import Head from "next/head";
+import "../styles/globals.css";
+import Loader from "./Components/Loader";
+import { createContext, useContext, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { fireAuth, fireStoreDB } from "../Firebase/base";
 
 const LoaderContext = createContext();
 export const LoaderProvider = ({ children }) => {
@@ -36,14 +36,21 @@ function MyApp({ Component, pageProps }) {
     <LoaderProvider>
       <PlayingProvider>
         <Head>
-          <script src="https://it.fontawesome.com/eb75260fb3.js" crossorigin="anonymous" async/>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
+          <script
+            src="https://it.fontawesome.com/eb75260fb3.js"
+            crossorigin="anonymous"
+            async
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0"
+          />
         </Head>
         <Loader />
         <Component {...pageProps} />
       </PlayingProvider>
     </LoaderProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
